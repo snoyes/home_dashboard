@@ -29,7 +29,7 @@ deactivate
 
 ## Run App
 
-Run the script inside of your venv
+Run the script inside of your project directory (make sure venv is activated):
 
 ```
 python main.py
