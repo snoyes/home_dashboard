@@ -17,5 +17,5 @@ deactivate
 Run the script inside of your venv
 
 ```
-pythony main.py
+python main.py
 ```
