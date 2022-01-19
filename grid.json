@@ -1,0 +1,93 @@
+{
+    "rows": [
+        {
+            "height": "1/16",
+            "use_margin": false,
+            "columns": [
+                {
+                    "width": "full",
+                    "component": "alerts"
+                }
+            ]
+        },
+        {
+            "height": "2/16",
+            "use_margin": true,
+            "columns": [
+                {
+                    "width": "2/3",
+                    "component": "clock"
+                },
+                {
+                    "width": "1/3",
+                    "component": "countdown"
+                }
+            ]
+        },
+        {
+            "height": "3/16",
+            "use_margin": true,
+            "columns": [
+                {
+                    "width": "1/3",
+                    "component": "thermostat"
+                },
+                {
+                    "width": "2/3",
+                    "component": "weather_forecast"
+                }
+            ]
+        },
+        {
+            "height": "2/16",
+            "use_margin": true,
+            "columns": [
+                {
+                    "width": "1/3",
+                    "component": "list"
+                },
+                {
+                    "width": "1/3",
+                    "component": "list"
+                },
+                {
+                    "width": "1/3",
+                    "component": "list"
+                }
+            ]
+        },
+        {
+            "height": "4/16",
+            "use_margin": false,
+            "columns": [
+                {
+                    "width": "full",
+                    "component": "video",
+                    "data": {
+                        "label": "CAM1 - Front Door"
+                    }
+                }
+            ]
+        },
+        {
+            "height": "3/16",
+            "use_margin": false,
+            "columns": [
+                {
+                    "width": "1/2",
+                    "component": "video",
+                    "data": {
+                        "label": "CAM2 - Balcony"
+                    }
+                },
+                {
+                    "width": "1/2",
+                    "component": "video",
+                    "data": {
+                        "label": "CAM3 - Printer"
+                    }
+                }
+            ]
+        }
+    ]
+}
