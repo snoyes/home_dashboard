@@ -1,3 +1,18 @@
+## Setup Environment
+
+Create venv from within project directory:
+
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+Install packages:
+
+```
+pip install -r requirements.txt
+```
+
 ## Start Environment
 
 Start your venv:
