@@ -21,7 +21,6 @@ def draw_row(row_number):
     x = ui.grid_margin if use_margin else 0
     
     for item in ui.grid[row_number]:
-        x += item["width"]
         
         if (grid_debug):
             shape = pygame.Rect(x, y, item["width"], row_height)
@@ -31,8 +30,10 @@ def draw_row(row_number):
         if "component" in item:
             item["component"](screen, x, y, item['width'], row_height)
 
+        x += item["width"]
+
 while True:
-    screen.fill(colors.indigo_900)
+    screen.fill(colors.indigo_800)
     draw_text('Example Text', fonts.font_md, colors.white, screen, 20, 20)
 
     for row_index in range(len(ui.grid)):
