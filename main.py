@@ -2,14 +2,11 @@ import pygame
 import sys
 import ui, colors, fonts
 
-# adding Folder_2 to the system path
-sys.path.insert(0, '/home/anthony/Code/python/home_dashboard/components')
-import alerts
-
 pygame.init()
 screen = pygame.display.set_mode((ui.SCREEN_WIDTH, ui.SCREEN_HEIGHT))
 pygame.display.set_caption('Home Dashboard')
 clock = pygame.time.Clock()
+grid_debug = True
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -24,9 +21,15 @@ def draw_row(row_number):
     x = ui.grid_margin if use_margin else 0
     
     for item in ui.grid[row_number]:
-        shape = pygame.Rect(x, y, item["width"], row_height),
-        pygame.Surface.fill(screen, item["color"], shape)
         x += item["width"]
+        
+        if (grid_debug):
+            shape = pygame.Rect(x, y, item["width"], row_height)
+            pygame.Surface.fill(screen, item["color"], shape)
+
+
+        if "component" in item:
+            item["component"](screen, x, y, item['width'], row_height)
 
 while True:
     screen.fill(colors.indigo_900)
@@ -34,8 +37,6 @@ while True:
 
     for row_index in range(len(ui.grid)):
         draw_row(row_index)
-
-    alerts.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

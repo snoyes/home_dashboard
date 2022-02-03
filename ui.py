@@ -1,5 +1,11 @@
 import pygame
 import colors
+import sys
+
+# adding components folder the system path
+sys.path.insert(0, '/home/anthony/Code/python/home_dashboard/components')
+import alerts
+import clock
 
 # SCREEN_WIDTH = 1080 
 # SCREEN_HEIGHT = 1920
@@ -81,6 +87,7 @@ row = []
 row.append({
     "color": colors.yellow_500,
     "width": grid_two_thirds,
+    "component": clock.draw
 })
 row.append({
     "color": colors.green_500,
