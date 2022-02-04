@@ -6,6 +6,9 @@ import sys
 sys.path.insert(0, '/home/anthony/Code/python/home_dashboard/components')
 import alerts
 import clock
+import countdown
+import climate_gauge
+import weather_forecast
 
 # SCREEN_WIDTH = 1080 
 # SCREEN_HEIGHT = 1920
@@ -65,10 +68,12 @@ rows.append({
 })
 
 
-grid_margin = 20
+grid_margin = 30
 
 grid_one_third = (SCREEN_WIDTH - (grid_margin*2))//3
 grid_two_thirds = (SCREEN_WIDTH - (grid_margin*2))*2//3
+grid_five_twelfth = (SCREEN_WIDTH - (grid_margin*2))*5//12
+grid_seven_twelfth = (SCREEN_WIDTH - (grid_margin*2))*7//12
 grid_full = SCREEN_WIDTH
 
 grid = []
@@ -92,6 +97,7 @@ row.append({
 row.append({
     "color": colors.green_500,
     "width": grid_one_third,
+    "component": countdown.draw
 })
 grid.append(row)
 
@@ -99,11 +105,13 @@ grid.append(row)
 row = []
 row.append({
     "color": colors.green_500,
-    "width": grid_one_third,
+    "width": grid_five_twelfth,
+    "component": climate_gauge.draw
 })
 row.append({
     "color": colors.purple_500,
-    "width": grid_two_thirds,
+    "width": grid_seven_twelfth,
+    "component": weather_forecast.draw
 })
 grid.append(row)
 

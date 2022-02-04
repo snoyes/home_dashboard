@@ -6,9 +6,7 @@ pygame.init()
 screen = pygame.display.set_mode((ui.SCREEN_WIDTH, ui.SCREEN_HEIGHT))
 pygame.display.set_caption('Home Dashboard')
 clock = pygame.time.Clock()
-fps = 1
-grid_debug = False
-# grid_debug = True
+grid_debug = True
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, 1, color)
@@ -36,6 +34,7 @@ def draw_row(row_number):
 
 while True:
     screen.fill(colors.indigo_800)
+    draw_text('Example Text', fonts.font_md, colors.white, screen, 20, 20)
 
     for row_index in range(len(ui.grid)):
         draw_row(row_index)
@@ -53,4 +52,4 @@ while True:
             if event.key == pygame.K_a:
                 pygame.display.set_mode((540, 900))
     pygame.display.update()
-    clock.tick(fps)
+    clock.tick(30)
