@@ -1,8 +1,9 @@
-import pygame
-import ui
+import pygame, ui
+from decouple import config
 
-FONT_SCALE = 0.5
-BASE_FONT_SIZE = 18
+
+FONT_SCALE = config("FONT_SCALE", default=0.5, cast=float)
+BASE_FONT_SIZE = config("BASE_FONT_SIZE", default=18, cast=int)
 
 def scale_text(multiplier):
     return int(multiplier * BASE_FONT_SIZE * FONT_SCALE)

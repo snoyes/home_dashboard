@@ -1,13 +1,12 @@
-import pygame
-import colors
-import sys
+import pygame, colors, sys
+from decouple import config
 
 # adding components folder the system path
 sys.path.insert(0, '/home/anthony/Code/python/home_dashboard/components')
 import alerts
 import clock
 import countdown
-import climate_gauge
+import current_weather
 import weather_forecast
 
 # SCREEN_WIDTH = 1080 
@@ -23,10 +22,8 @@ else:
     DEFAULT_WIDTH = 1080
     DEFAULT_HEIGHT = 1920
 
-
-# Get from .env
-SCREEN_WIDTH = 540
-SCREEN_HEIGHT = 960
+SCREEN_WIDTH = config('SCREEN_WIDTH', default=DEFAULT_WIDTH, cast=int)
+SCREEN_HEIGHT = config('SCREEN_HEIGHT', default=DEFAULT_HEIGHT, cast=int)
 
 def row_y(row_number):
     if row_number == 0:
@@ -68,7 +65,7 @@ rows.append({
 })
 
 
-grid_margin = 30
+grid_margin = config('GRID_MARGIN', default=30, cast=int)
 
 grid_one_third = (SCREEN_WIDTH - (grid_margin*2))//3
 grid_two_thirds = (SCREEN_WIDTH - (grid_margin*2))*2//3
@@ -106,7 +103,7 @@ row = []
 row.append({
     "color": colors.green_500,
     "width": grid_five_twelfth,
-    "component": climate_gauge.draw
+    "component": current_weather.draw
 })
 row.append({
     "color": colors.purple_500,
