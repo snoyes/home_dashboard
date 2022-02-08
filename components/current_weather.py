@@ -15,13 +15,13 @@ ICON_SCALE = config('ICON_SCALE', default=1, cast=int)
 
 def draw(screen, rect):
 
-    current_weather_data = weather.current()
+    weather_data = weather.current()
 
-    if not current_weather_data:
+    if not weather_data:
         # TODO: Add loading text/animation
         return
 
-    center = (rect.x + (rect.width//2) - 10, rect.y + (rect.height//2))
+    center = (rect.x + (rect.width//2) - 10, rect.y + (rect.height//2) - fonts.font_2xl.get_height())
 
     # Draw Circle
     circle_radius = rect.width//10*8//2
@@ -39,14 +39,14 @@ def draw(screen, rect):
     gfxdraw.filled_circle(screen, sun_pos[0], sun_pos[1], sun_radius, colors.yellow_500)
 
     # Draw Temperature
-    current_temp = str(round(current_weather_data['temp']))
+    current_temp = str(round(weather_data['temp']))
     temp_text = fonts.font_8xl.render(f'{current_temp}°', 1, colors.white)
     temp_text_rect = temp_text.get_rect()
     temp_text_rect.center = (center[0], center[1] - ((50 if ICON_SCALE > 1 else 25)//2))
     screen.blit(temp_text, temp_text_rect)
 
     # Draw Icon
-    icon_name = current_weather_data['weather'][0]['icon'] + ("@2x" if ICON_SCALE > 1 else "") + ".png"
+    icon_name = weather_data['weather'][0]['icon'] + ("@2x" if ICON_SCALE > 1 else "") + ".png"
     icon_path = f'icons/weather/{icon_name}'
     
     if (exists(icon_path)):
@@ -56,9 +56,11 @@ def draw(screen, rect):
         screen.blit(icon, (center[0] - (icon_width//2), center[1]))
 
     # Draw Sunrise/Sunset Time
-    sun_change_text = fonts.font_2xl.render("Sunset at 6:11 PM", 1, colors.white)
+    next_sun_event = get_next_sun_event(weather_data)
+    sun_change_text = next_sun_event[0][0].upper() + next_sun_event[0][1:] + " at " + format_time(next_sun_event[1])
+    sun_change_text = fonts.font_2xl.render(sun_change_text, 1, colors.white)
     sun_change_text_rect = sun_change_text.get_rect()
-    sun_change_text_rect.center = (center[0], center[1] + circle_radius + fonts.font_2xl.get_height()*1.5)
+    sun_change_text_rect.center = (center[0], center[1] + circle_radius + fonts.font_2xl.get_height()*2)
     screen.blit(sun_change_text, sun_change_text_rect)
 
 def sun_position(center, radius, degrees):
@@ -67,3 +69,21 @@ def sun_position(center, radius, degrees):
 
 def hours_to_degrees(hours):
     return (hours/24 * 360 + 90) % 360
+
+def get_next_sun_event(today):
+
+    if datetime.fromtimestamp(today['sunrise']) > datetime.now():
+        return ('sunrise', today['sunrise'])
+
+    if datetime.fromtimestamp(today['sunset']) > datetime.now():
+        return ('sunset', today['sunset'])
+
+    # Sun has set for today so get tomorrow's sunrise
+    return ('sunrise', weather.daily()[1]['sunrise'])
+
+def format_time(timestamp):
+    time = datetime.fromtimestamp(timestamp)
+    hours = str(int(time.strftime("%I")))
+    minutes = time.strftime("%M")
+    ampm = time.strftime("%p")
+    return f'{hours}:{minutes} {ampm}'
