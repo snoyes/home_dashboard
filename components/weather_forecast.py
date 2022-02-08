@@ -12,7 +12,7 @@ row_height = font.get_height()
 
 ICON_SCALE = config('ICON_SCALE', default=1, cast=int)
 
-def draw(screen, x, y, width, height):
+def draw(screen, rect):
 
     global surface
     surface = screen
@@ -24,24 +24,24 @@ def draw(screen, x, y, width, height):
     with open('.weather_data') as json_file:
         weather_data = json.load(json_file)
 
-    column_plus_padding = (width - (padding*2))/5
+    column_plus_padding = (rect.width - (padding*2))/5
     column_padding = column_plus_padding/10
     column_width = column_padding*8
     column_height = (column_padding*2) + (row_height + row_height//2) * 5
     table_width = column_plus_padding*5
 
-    padding_x = (width - table_width)//2
-    padding_y = (height - column_height)//2
+    padding_x = (rect.width - table_width)//2
+    padding_y = (rect.height - column_height)//2
 
-    x_pos = x + padding_x + column_padding + column_width//2
+    x_pos = rect.x + padding_x + column_padding + column_width//2
 
     # Border around first column
-    border_rect = (x + padding_x + column_padding//2, y + padding_y, column_padding + column_width, column_height)
+    border_rect = (rect.x + padding_x + column_padding//2, rect.y + padding_y, column_padding + column_width, column_height)
     pygame.draw.rect(screen, colors.white, border_rect, 2, 5)
 
     for i in range(5):
         weather_data_day = weather_data['daily'][i]
-        draw_column((x_pos, y + padding_y), {
+        draw_column((x_pos, rect.y + padding_y), {
             "letter": datetime.fromtimestamp(weather_data_day['dt']).strftime("%a")[0],
             "high": str(round(weather_data_day['temp']['max'])),
             "low": str(round(weather_data_day['temp']['min'])),

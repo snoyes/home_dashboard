@@ -1,29 +1,30 @@
-import pygame, colors, sys
+import pygame, sys, json
 from decouple import config
+from fractions import Fraction
 
-# adding components folder the system path
-sys.path.insert(0, '/home/anthony/Code/python/home_dashboard/components')
-import alerts
-import clock
-import countdown
-import current_weather
-import weather_forecast
+SCREEN_WIDTH = config('SCREEN_WIDTH', default=1080, cast=int)
+SCREEN_HEIGHT = config('SCREEN_HEIGHT', default=1920, cast=int)
+DEBUG_GRID = config('DEBUG_GRID', default=False, cast=bool)
+GRID_MARGIN = config('GRID_MARGIN', default=30, cast=int)
 
-# SCREEN_WIDTH = 1080 
-# SCREEN_HEIGHT = 1920
+def draw_row(screen, row_number):
+    y = row_y(row_number)
+    row_height = rows[row_number]["height"]
+    use_margin = rows[row_number]["use_margin"]
+    x = GRID_MARGIN if use_margin else 0
+    
+    for column in rows[row_number]['columns']:
+        
+        if (DEBUG_GRID):
+            shape = pygame.Rect(x, y, column["width"], row_height)
+            pygame.Surface.fill(screen, column["color"], shape)
+            pygame.rect()
 
-# Get from .env
-SCREEN_ORIENTATION = 'landscape'
+        if "component" in column:
+            rect = pygame.Rect(x, y, column['width'], row_height)
+            column["component"](screen, rect)
 
-if SCREEN_ORIENTATION == 'landscape':
-    DEFAULT_WIDTH = 1920
-    DEFAULT_HEIGHT = 1080
-else: 
-    DEFAULT_WIDTH = 1080
-    DEFAULT_HEIGHT = 1920
-
-SCREEN_WIDTH = config('SCREEN_WIDTH', default=DEFAULT_WIDTH, cast=int)
-SCREEN_HEIGHT = config('SCREEN_HEIGHT', default=DEFAULT_HEIGHT, cast=int)
+        x += column["width"]
 
 def row_y(row_number):
     if row_number == 0:
@@ -37,116 +38,33 @@ def row_y(row_number):
 
     return y
 
-rows = []
+def get_component_callback(component_name):
+    sys.path.append('components')
+    module = __import__(component_name)
+    return getattr(module, 'draw')
 
-rows.append({
-    "height": SCREEN_HEIGHT*1//16,
-    "use_margin": False
-})
-rows.append({
-    "height": SCREEN_HEIGHT*2//16,
-    "use_margin": True
-})
-rows.append({
-    "height": SCREEN_HEIGHT*4//16,
-    "use_margin": True
-})
-rows.append({
-    "height": SCREEN_HEIGHT*2//16,
-    "use_margin": True
-})
-rows.append({
-    "height": SCREEN_HEIGHT*4//16,
-    "use_margin": False
-})
-rows.append({
-    "height": SCREEN_HEIGHT*3//16,
-    "use_margin": False
-})
+def get_rows():
+    with open('template.json') as json_file:
+        grid_data = json.load(json_file)
 
+    rows = []
 
-grid_margin = config('GRID_MARGIN', default=30, cast=int)
+    for row in grid_data['rows']:
+        columns = []
+        
+        for column in row['columns']:
+            margins = (GRID_MARGIN * 2) if row['use_margin'] else 0
+            columns.append({
+                "width": int((SCREEN_WIDTH - margins) * Fraction(column['width'])),
+                "component": get_component_callback(column['component'])
+            })
 
-grid_one_third = (SCREEN_WIDTH - (grid_margin*2))//3
-grid_two_thirds = (SCREEN_WIDTH - (grid_margin*2))*2//3
-grid_five_twelfth = (SCREEN_WIDTH - (grid_margin*2))*5//12
-grid_seven_twelfth = (SCREEN_WIDTH - (grid_margin*2))*7//12
-grid_full = SCREEN_WIDTH
+        rows.append({
+            "height": int(SCREEN_HEIGHT * Fraction(row['height'])),
+            "columns": columns,
+            "use_margin": row["use_margin"]
+        })
+    
+    return rows
 
-grid = []
-
-# Row 0
-row = []
-row.append({
-    "color": colors.red_500,
-    "width": SCREEN_WIDTH
-})
-grid.append(row)
-
-
-# Row 1
-row = []
-row.append({
-    "color": colors.yellow_500,
-    "width": grid_two_thirds,
-    "component": clock.draw
-})
-row.append({
-    "color": colors.green_500,
-    "width": grid_one_third,
-    "component": countdown.draw
-})
-grid.append(row)
-
-# Row 2
-row = []
-row.append({
-    "color": colors.green_500,
-    "width": grid_five_twelfth,
-    "component": current_weather.draw
-})
-row.append({
-    "color": colors.purple_500,
-    "width": grid_seven_twelfth,
-    "component": weather_forecast.draw
-})
-grid.append(row)
-
-# Row 3
-row = []
-row.append({
-    "color": colors.blue_500,
-    "width": grid_one_third,
-})
-row.append({
-    "color": colors.red_500,
-    "width": grid_one_third,
-})
-row.append({
-    "color": colors.green_500,
-    "width": grid_one_third,
-})
-grid.append(row)
-
-# Row 4
-row = []
-row.append({
-    "color": colors.yellow_500,
-    "width": SCREEN_WIDTH
-})
-grid.append(row)
-
-# Row 5
-row = []
-row.append({
-    "color": colors.blue_500,
-    "width": SCREEN_WIDTH//2
-})
-row.append({
-    "color": colors.red_500,
-    "width": SCREEN_WIDTH//2
-})
-grid.append(row)
-
-
-
+rows = get_rows()

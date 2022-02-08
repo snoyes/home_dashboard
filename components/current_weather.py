@@ -1,4 +1,4 @@
-import sys, math, json
+import sys, math
 from datetime import datetime
 from os.path import exists
 
@@ -6,27 +6,25 @@ sys.path.append('../')
 import colors
 import fonts
 import pygame
+import weather
 from pygame import gfxdraw
 from decouple import config
 
 padding = 10
 ICON_SCALE = config('ICON_SCALE', default=1, cast=int)
 
-def draw(screen, x, y, width, height):
+def draw(screen, rect):
 
-    if(exists('.weather_data') == False):
+    current_weather_data = weather.current()
+
+    if not current_weather_data:
         # TODO: Add loading text/animation
         return
 
-    with open('.weather_data') as json_file:
-        weather_data = json.load(json_file)
-
-    current_weather_data = weather_data['current']
-
-    center = (x + (width//2) - 10, y + (height//2))
+    center = (rect.x + (rect.width//2) - 10, rect.y + (rect.height//2))
 
     # Draw Circle
-    circle_radius = width//10*8//2
+    circle_radius = rect.width//10*8//2
     gfxdraw.aacircle(screen, center[0], center[1], circle_radius, colors.white)
     gfxdraw.filled_circle(screen, center[0], center[1], circle_radius, colors.white)
     gfxdraw.aacircle(screen, center[0], center[1], circle_radius-4, colors.indigo_800)

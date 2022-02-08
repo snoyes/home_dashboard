@@ -5,7 +5,7 @@
             "use_margin": false,
             "columns": [
                 {
-                    "width": "full",
+                    "width": "1",
                     "component": "alerts"
                 }
             ]
@@ -30,7 +30,7 @@
             "columns": [
                 {
                     "width": "1/3",
-                    "component": "thermostat"
+                    "component": "current_weather"
                 },
                 {
                     "width": "2/3",
@@ -44,15 +44,15 @@
             "columns": [
                 {
                     "width": "1/3",
-                    "component": "list"
+                    "component": "blank"
                 },
                 {
                     "width": "1/3",
-                    "component": "list"
+                    "component": "blank"
                 },
                 {
                     "width": "1/3",
-                    "component": "list"
+                    "component": "blank"
                 }
             ]
         },
@@ -61,11 +61,8 @@
             "use_margin": false,
             "columns": [
                 {
-                    "width": "full",
-                    "component": "video",
-                    "data": {
-                        "label": "CAM1 - Front Door"
-                    }
+                    "width": "1",
+                    "component": "blank"
                 }
             ]
         },
@@ -75,17 +72,11 @@
             "columns": [
                 {
                     "width": "1/2",
-                    "component": "video",
-                    "data": {
-                        "label": "CAM2 - Balcony"
-                    }
+                    "component": "blank"
                 },
                 {
                     "width": "1/2",
-                    "component": "video",
-                    "data": {
-                        "label": "CAM3 - Printer"
-                    }
+                    "component": "blank"
                 }
             ]
         }

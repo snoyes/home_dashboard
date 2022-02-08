@@ -8,21 +8,21 @@ import fonts
 padding = 10
 counter_font = fonts.font_8xl
 label_font = fonts.font_3xl
-def draw(screen, x, y, width, height):
+def draw(screen, rect):
 
-    y_padding = (height - (counter_font.get_height() + label_font.get_height()))//2
+    y_padding = (rect.height - (counter_font.get_height() + label_font.get_height()))//2
 
     # Draw Counter
     
     counter_text = fonts.font_8xl.render(str(days_until_next_year()), 1, colors.white)
     counter_text_rect = counter_text.get_rect()
-    counter_text_rect.topright = (x + width - padding, y + y_padding)
+    counter_text_rect.topright = (rect.x + rect.width - padding, rect.y + y_padding)
     screen.blit(counter_text, counter_text_rect)
 
     # Draw Label
     label_text = label_font.render(f'Days Until {next_year()}', 1, colors.white)
     label_text_rect = label_text.get_rect()
-    label_text_rect.topright = (x + width - padding, counter_text_rect.y + counter_text_rect.height)
+    label_text_rect.topright = (rect.x + rect.width - padding, counter_text_rect.y + counter_text_rect.height)
     screen.blit(label_text, label_text_rect)
 
 def next_year():
