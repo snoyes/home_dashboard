@@ -1,16 +1,16 @@
 import pygame, ui
 from decouple import config
 
-
 FONT_SCALE = config("FONT_SCALE", default=0.5, cast=float)
 BASE_FONT_SIZE = config("BASE_FONT_SIZE", default=18, cast=int)
+FONT_NAME = config("FONT_NAME", cast=str)
 
 def scale_text(multiplier):
     return int(multiplier * BASE_FONT_SIZE * FONT_SCALE)
 
 pygame.font.init()
 
-font_xs = pygame.font.SysFont('manjari', scale_text(0.75))
+font_xs = pygame.font.SysFont(FONT_NAME, scale_text(0.75))
 font_sm = pygame.font.SysFont('manjari', scale_text(0.875))
 font_md = pygame.font.SysFont('manjari', scale_text(1))
 font_lg = pygame.font.SysFont('manjari', scale_text(1.125))

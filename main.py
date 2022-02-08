@@ -16,6 +16,7 @@ pygame.time.set_timer(FETCH_WEATHER, int(1000 * 60 * weather.FREQUENCY))
 weather.fetch()
 
 while True:
+
     screen.fill(colors.indigo_800)
 
     for row_index in range(len(ui.rows)):

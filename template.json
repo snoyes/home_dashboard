@@ -6,7 +6,8 @@
             "columns": [
                 {
                     "width": "1",
-                    "component": "alerts"
+                    "component": "alerts",
+                    "debug_color": "red_500"
                 }
             ]
         },
@@ -16,11 +17,13 @@
             "columns": [
                 {
                     "width": "2/3",
-                    "component": "clock"
+                    "component": "clock",
+                    "debug_color": "red_500"
                 },
                 {
                     "width": "1/3",
-                    "component": "countdown"
+                    "component": "countdown",
+                    "debug_color": "red_500"
                 }
             ]
         },
