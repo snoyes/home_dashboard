@@ -70,4 +70,16 @@ If you install any new packages using pip, save them to the requirements so they
 
 ```
 pip freeze > requirements.txt
+
 ```
+
+### Adding Components
+
+Create a new custom component to display in the app:
+
+1. Create new Python module in `components` directory
+2. Register the component in the `templates.json` file
+
+All components must have a `draw` function with `screen` and `rect` arguments. Check out the existing components for examples.
+
+You can add a component to an existing row's columns in the `template.json` or create a new row.
