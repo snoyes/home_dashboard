@@ -6,7 +6,7 @@ OPEN_WEATHER_MAP_API_KEY = config('OPEN_WEATHER_MAP_API_KEY', default='', cast=s
 OPEN_WEATHER_MAP_API_URL = "https://api.openweathermap.org"
 LOCATION_LAT = config('LOCATION_LAT', cast=float)
 LOCATION_LONG = config('LOCATION_LONG', cast=float)
-FREQUENCY = config('WEATHER_RELOAD_FREQUENCY_MINUTES', default=1, cast=int)
+FREQUENCY = config('WEATHER_RELOAD_FREQUENCY_MINUTES', default=5, cast=int)
 
 # Request data from API
 def fetch():
