@@ -10,6 +10,9 @@ screen = pygame.display.set_mode((ui.SCREEN_WIDTH, ui.SCREEN_HEIGHT))
 pygame.display.set_caption(CAPTION)
 clock = pygame.time.Clock()
 
+# Hide Mouse
+pygame.mouse.set_visible(config('SHOW_MOUSE', default=False, cast=bool))
+
 # Create timer to fetch weather at intervals
 FETCH_WEATHER = pygame.USEREVENT+1
 pygame.time.set_timer(FETCH_WEATHER, int(1000 * 60 * weather.FREQUENCY))
@@ -17,7 +20,7 @@ weather.fetch()
 
 while True:
 
-    screen.fill(colors.indigo_800)
+    screen.fill(colors.bg_color)
 
     for row_index in range(len(ui.rows)):
         ui.draw_row(screen, row_index)

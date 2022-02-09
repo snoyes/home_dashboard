@@ -1,33 +1,62 @@
-## Setup Environment
+# Home Dashboard
 
-Create venv from within project directory:
+A digital clock and weather app built with Python for the Raspberry Pi
+
+Check out the [documentation](https://aalcala07.github.io/home_dashboard/) to get started.
+
+
+
+## Developer Instructions
+
+These instructions are for anyone wanting to change the source code.
+
+### Initial Environment Setup
+
+1. Clone repository
+
+```
+git clone git@github.com:aalcala07/home_dashboard.git
+```
+
+2. Create venv from within project directory:
 
 ```
 python -m venv venv
 source venv/bin/activate
 ```
 
-Install packages:
+4. Install packages:
 
 ```
 pip install -r requirements.txt
 ```
 
-## Start Environment
+5. Copy example config
 
-Start your venv:
+```
+cp .env.example .env
+```
+
+6. Edit the `.env` file and copy your API key to `OPEN_WEATHER_MAP_API_KEY`
+7. Change the `LOCATION_LAT` and `LOCATION_LONG` (go to Google Maps and right click your city or any point on the map to get coordinates)
+8. Change the `SCREEN_WIDTH and `SCREEN_HEIGHT` to match your screen resolution or desired resolution
+9. Tweak other config fields as needed
+
+### Starting and Stopping Environment
+
+To start the venv use:
 
 ```
 source venv/bin/activate
 ```
 
-## Exit Environment
+To exit the venv use:
 
 ```
 deactivate
 ```
 
-## Run App
+### Launching the App
 
 Run the script inside of your project directory (make sure venv is activated):
 
@@ -35,48 +64,22 @@ Run the script inside of your project directory (make sure venv is activated):
 python main.py
 ```
 
-## Development
-
-### Save Requirements
+### Saving Requirements
 
 If you install any new packages using pip, save them to the requirements so they are added when setting up a new environment.
 
 ```
 pip freeze > requirements.txt
-```
-
-## Deploying to Raspberry Pi
-
-1. Create deploy key, add to repo
-2. Clone repo
-3. Install venv
 
 ```
-sudo apt-get install python3-venv
-```
 
-4. Create venv and activate
+### Adding Components
 
-```
-cd home_dashboard
-python3 -m venv venv
-source venv/bin/activate
-```
+Create a new custom component to display in the app:
 
-5. Install packages
+1. Create new Python module in `components` directory
+2. Register the component in the `templates.json` file
 
-```
-pip install -r requirements.txt
-```
+All components must have a `draw` function with `screen` and `rect` arguments. Check out the existing components for examples.
 
-6. Copy example config
-
-```
-cp .env.example .env
-```
-
-7. Update config with API key and other settings
-8. Launch app
-```
-python main.py
-```
+You can add a component to an existing row's columns in the `template.json` or create a new row.

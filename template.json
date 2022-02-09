@@ -1,84 +1,51 @@
 {
     "rows": [
         {
-            "height": "1/16",
+            "height": "1/32",
             "use_margin": false,
             "columns": [
                 {
                     "width": "1",
-                    "component": "alerts",
-                    "debug_color": "red_500"
-                }
-            ]
-        },
-        {
-            "height": "2/16",
-            "use_margin": true,
-            "columns": [
-                {
-                    "width": "2/3",
-                    "component": "clock",
-                    "debug_color": "red_500"
-                },
-                {
-                    "width": "1/3",
-                    "component": "countdown",
-                    "debug_color": "red_500"
-                }
-            ]
-        },
-        {
-            "height": "3/16",
-            "use_margin": true,
-            "columns": [
-                {
-                    "width": "1/3",
-                    "component": "current_weather"
-                },
-                {
-                    "width": "2/3",
-                    "component": "weather_forecast"
-                }
-            ]
-        },
-        {
-            "height": "2/16",
-            "use_margin": true,
-            "columns": [
-                {
-                    "width": "1/3",
-                    "component": "blank"
-                },
-                {
-                    "width": "1/3",
-                    "component": "blank"
-                },
-                {
-                    "width": "1/3",
-                    "component": "blank"
+                    "component": "alerts"
                 }
             ]
         },
         {
             "height": "4/16",
-            "use_margin": false,
+            "use_margin": true,
             "columns": [
                 {
                     "width": "1",
-                    "component": "blank"
+                    "component": "clock"
                 }
             ]
         },
         {
-            "height": "3/16",
+            "height": "4/16",
+            "use_margin": true,
+            "columns": [
+                {
+                    "width": "1",
+                    "component": "weather_panel"
+                }
+            ]
+        },
+        {
+            "height": "7/16",
             "use_margin": false,
             "columns": [
                 {
-                    "width": "1/2",
-                    "component": "blank"
-                },
+                    "width": "1",
+                    "component": "camera_panel"
+                }
+            ]
+        },
+        {
+            "height": "1/32",
+            "use_margin": true,
+            "columns": [
                 {
-                    "width": "1/2",
+                    "width": "1",
                     "component": "blank"
                 }
             ]
