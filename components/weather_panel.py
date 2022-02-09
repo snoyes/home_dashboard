@@ -75,7 +75,7 @@ def draw_thermometer(screen, rect, weather_data):
     center = (rect.x + rect.width//2, rect.y + rect.height//2)
     content_y = center[1] - content_height//2
     
-    outline_width = 5
+    outline_width = content_width//6
     border_radius = content_width//2
 
     # Thermometer Fill
