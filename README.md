@@ -2,9 +2,7 @@
 
 A digital clock and weather app built with Python for the Raspberry Pi
 
-## Setup Guide
-
-Check out the documentation to set this up on your own device:
+Check out the documentation to get started:
 https://aalcala07.github.io/home_dashboard/
 
 
