@@ -34,3 +34,11 @@ Run the script inside of your project directory (make sure venv is activated):
 ```
 python main.py
 ```
+
+## Save Requirements
+
+If you install any new packages using pip, save them to the requirements so they are added when setting up a new environment.
+
+```
+pip freeze > requirements.txt
+```
