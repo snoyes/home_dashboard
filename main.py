@@ -17,7 +17,7 @@ weather.fetch()
 
 while True:
 
-    screen.fill(colors.indigo_800)
+    screen.fill(colors.bg_color)
 
     for row_index in range(len(ui.rows)):
         ui.draw_row(screen, row_index)

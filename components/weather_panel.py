@@ -70,7 +70,7 @@ def draw_thermometer(screen, rect, weather_data):
     else: 
         fill_percentage = temp/max_temp
 
-    content_height = rect.height*4//5
+    content_height = rect.height*7//10
     content_width = rect.width//3
     center = (rect.x + rect.width//2, rect.y + rect.height//2)
     content_y = center[1] - content_height//2
