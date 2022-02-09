@@ -12,26 +12,32 @@ These instructions are for anyone wanting to change the source code.
 
 ### Initial Environment Setup
 
-1. Create venv from within project directory:
+1. Clone repository
+
+```
+git clone git@github.com:aalcala07/home_dashboard.git
+```
+
+2. Create venv from within project directory:
 
 ```
 python -m venv venv
 source venv/bin/activate
 ```
 
-2. Install packages:
+4. Install packages:
 
 ```
 pip install -r requirements.txt
 ```
 
-3. Copy `.env.example`
+5. Copy `.env.example`
 
 ```
 cp .env.example .env
 ```
 
-4. Edit config values as needed
+6. Edit config values as needed
 
 ### Starting and Stopping Environment
 
