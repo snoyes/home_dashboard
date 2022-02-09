@@ -1,33 +1,55 @@
-## Setup Environment
+# Home Dashboard
 
-Create venv from within project directory:
+A digital clock and weather app built with Python for the Raspberry Pi
+
+## Setup Guide
+
+Check out the documentation to set this up on your own device:
+https://aalcala07.github.io/home_dashboard/
+
+
+## Developer Instructions
+
+These instructions are for anyone wanting to change the source code.
+
+### Initial Environment Setup
+
+1. Create venv from within project directory:
 
 ```
 python -m venv venv
 source venv/bin/activate
 ```
 
-Install packages:
+2. Install packages:
 
 ```
 pip install -r requirements.txt
 ```
 
-## Start Environment
+3. Copy `.env.example`
 
-Start your venv:
+```
+cp .env.example .env
+```
+
+4. Edit config values as needed
+
+### Starting and Stopping Environment
+
+To start the venv use:
 
 ```
 source venv/bin/activate
 ```
 
-## Exit Environment
+To exit the venv use:
 
 ```
 deactivate
 ```
 
-## Run App
+### Launching the App
 
 Run the script inside of your project directory (make sure venv is activated):
 
@@ -35,48 +57,10 @@ Run the script inside of your project directory (make sure venv is activated):
 python main.py
 ```
 
-## Development
-
-### Save Requirements
+### Saving Requirements
 
 If you install any new packages using pip, save them to the requirements so they are added when setting up a new environment.
 
 ```
 pip freeze > requirements.txt
-```
-
-## Deploying to Raspberry Pi
-
-1. Create deploy key, add to repo
-2. Clone repo
-3. Install venv
-
-```
-sudo apt-get install python3-venv
-```
-
-4. Create venv and activate
-
-```
-cd home_dashboard
-python3 -m venv venv
-source venv/bin/activate
-```
-
-5. Install packages
-
-```
-pip install -r requirements.txt
-```
-
-6. Copy example config
-
-```
-cp .env.example .env
-```
-
-7. Update config with API key and other settings
-8. Launch app
-```
-python main.py
 ```
