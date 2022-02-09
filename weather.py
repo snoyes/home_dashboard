@@ -23,10 +23,15 @@ def fetch():
         print('Error: unable to retrieve weather data')
     else:
         weather_data = r.json()
-        weather_data_file = open(".weather_data", "w") 
-        weather_data_file.write(json.dumps(weather_data, indent = 4))
-        weather_data_file.close()
-        print('Weather data saved')
+
+        if 'current' in weather_data:
+            weather_data_file = open(".weather_data", "w") 
+            weather_data_file.write(json.dumps(weather_data, indent = 4))
+            weather_data_file.close()
+            print('Weather data saved')
+        else:
+            # Rate limit reached or other error
+            print('Weather was not provided. Check API rate limit.')
 
 # Get data from cache file
 def get():
