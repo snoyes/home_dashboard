@@ -29,15 +29,7 @@ def draw_row(screen, row_number):
         x += column["width"]
 
 def row_y(row_number):
-    if row_number == 0:
-        return 0
-    elif row_number == 1:
-        return rows[0]["height"]
-    y = 0
-
-    for i in range(row_number):
-        y += rows[i]["height"]
-
+    y = sum(rows[i]["height"] for i in range(row_number))
     return y
 
 def get_component_callback(component_name):
