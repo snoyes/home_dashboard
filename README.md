@@ -39,7 +39,7 @@ cp .env.example .env
 
 6. Edit the `.env` file and copy your API key to `OPEN_WEATHER_MAP_API_KEY`
 7. Change the `LOCATION_LAT` and `LOCATION_LONG` (go to Google Maps and right click your city or any point on the map to get coordinates)
-8. Change the `SCREEN_WIDTH and `SCREEN_HEIGHT` to match your screen resolution or desired resolution
+8. Change the `SCREEN_WIDTH` and `SCREEN_HEIGHT` to match your screen resolution or desired resolution
 9. Tweak other config fields as needed
 
 ### Starting and Stopping Environment
