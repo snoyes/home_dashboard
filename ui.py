@@ -1,7 +1,7 @@
 import pygame, sys, json
 from decouple import config
 from fractions import Fraction
-from itertools import repeat
+#from itertools import repeat
 import colors
 
 SCREEN_WIDTH = config('SCREEN_WIDTH', default=1080, cast=int)

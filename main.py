@@ -1,6 +1,7 @@
 import sys, pygame
 from decouple import config
-import ui, colors, weather
+import ui, colors
+import update
 
 CAPTION = config('CAPTION', default='Home Dashboard', cast=str)
 FPS = config('FPS', default=1, cast=int)
@@ -13,10 +14,15 @@ clock = pygame.time.Clock()
 # Hide Mouse
 pygame.mouse.set_visible(config('SHOW_MOUSE', default=False, cast=bool))
 
-# Create timer to fetch weather at intervals
-FETCH_WEATHER = pygame.USEREVENT+1
-pygame.time.set_timer(FETCH_WEATHER, int(1000 * 60 * weather.FREQUENCY))
-weather.fetch()
+UPDATE_EVENTS = {}
+for component in update.list_active_components():
+    if (callback := update.get_component_callback(component)):
+        update_frequency = update.get_update_frequency(component)
+        event_type = pygame.event.custom_type()
+        UPDATE_EVENTS[event_type] = callback
+        pygame.time.set_timer(event_type, 1000 * update_frequency)
+        if config('UPDATE_ON_STARTUP', default=False, cast=bool):
+            callback()
 
 while True:
 
@@ -31,8 +37,8 @@ while True:
             pygame.quit()
             sys.exit()
 
-        if event.type == FETCH_WEATHER:
-            weather.fetch()
+        if event.type in UPDATE_EVENTS:
+            UPDATE_EVENTS[event.type]()
 
     pygame.display.update()
     clock.tick(FPS)

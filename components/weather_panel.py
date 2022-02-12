@@ -5,6 +5,7 @@ from os.path import exists
 
 sys.path.append('../')
 import pygame, colors, fonts, weather
+from weather import fetch as update
 
 ICON_SCALE = config('ICON_SCALE', default=1, cast=int)
 

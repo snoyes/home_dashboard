@@ -1,4 +1,4 @@
-import pygame, ui
+import pygame
 from decouple import config
 
 FONT_SCALE = config("FONT_SCALE", default=0.5, cast=float)

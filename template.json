@@ -36,7 +36,7 @@
             "columns": [
                 {
                     "width": "1",
-                    "component": "camera_panel"
+                    "component": "is_it_friday"
                 }
             ]
         },

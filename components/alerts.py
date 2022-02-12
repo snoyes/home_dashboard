@@ -2,7 +2,6 @@ import sys
 sys.path.append('../')
 
 import pygame
-import ui
 import colors
 import fonts
 
