@@ -9,7 +9,7 @@ LOCATION_LONG = config('LOCATION_LONG', cast=float)
 FREQUENCY = config('WEATHER_RELOAD_FREQUENCY_MINUTES', default=5, cast=int)
 
 # Request data from API
-def fetch():
+def update():
 
     if not OPEN_WEATHER_MAP_API_KEY or OPEN_WEATHER_MAP_API_KEY == '':
         print('Error: Cannot fetch weather, missing OPEN_WEATHER_MAP_API_KEY')
@@ -25,7 +25,7 @@ def fetch():
         weather_data = r.json()
 
         if 'current' in weather_data:
-            weather_data_file = open(".weather_data", "w") 
+            weather_data_file = open("cache/.weather_data", "w") 
             weather_data_file.write(json.dumps(weather_data, indent = 4))
             weather_data_file.close()
             print('Weather data saved')
@@ -36,10 +36,10 @@ def fetch():
 # Get data from cache file
 def get():
 
-    if(exists('.weather_data') == False):
+    if(exists('cache/.weather_data') == False):
         return None
         
-    with open('.weather_data') as json_file:
+    with open('cache/.weather_data') as json_file:
         weather_data = json.load(json_file)
 
     return weather_data

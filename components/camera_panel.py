@@ -1,7 +1,7 @@
 import sys
 
 sys.path.append('../')
-import pygame, colors, fonts, weather
+import pygame, colors, fonts
 
 camera_label_font = fonts.font_2xl
 primary_camera_status_font = fonts.font_7xl
