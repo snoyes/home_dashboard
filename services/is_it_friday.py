@@ -5,11 +5,15 @@ def update():
     logging.info('Fetching Is It Friday data')
     url = 'https://www.is-it-friday.org/'
     friday = False
-    if (r := requests.get(url)):
+    try:
+        r = requests.get(url)
         friday = "YES!!! IT'S FRIDAY" in r.text
 
-    with open('cache/.is_it_friday_data', 'w') as f:
-        print(friday, file=f)
+        with open('cache/.is_it_friday_data', 'w') as f:
+            print(friday, file=f)
+    except requests.exceptions.RequestException as e:
+        logging.error('Connection error while trying to retrieve Is It Friday data')
+
 
 def get_text():
     try:

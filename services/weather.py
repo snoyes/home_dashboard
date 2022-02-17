@@ -1,6 +1,7 @@
 import requests, json
 from os.path import exists
 from decouple import config
+import logging
 
 OPEN_WEATHER_MAP_API_KEY = config('OPEN_WEATHER_MAP_API_KEY', default='', cast=str)
 OPEN_WEATHER_MAP_API_URL = "https://api.openweathermap.org"
@@ -12,16 +13,13 @@ FREQUENCY = config('WEATHER_RELOAD_FREQUENCY_MINUTES', default=5, cast=int)
 def update():
 
     if not OPEN_WEATHER_MAP_API_KEY or OPEN_WEATHER_MAP_API_KEY == '':
-        print('Error: Cannot fetch weather, missing OPEN_WEATHER_MAP_API_KEY')
+        logging.error('Cannot fetch weather. Missing OPEN_WEATHER_MAP_API_KEY')
         return
 
-    print('Fetching weather')
+    logging.info('Fetching weather data')
 
     try:
         r = requests.get(f'{OPEN_WEATHER_MAP_API_URL}/data/2.5/onecall?lat={LOCATION_LAT}&lon={LOCATION_LONG}&appid={OPEN_WEATHER_MAP_API_KEY}&exclude=minutely,hourly,alerts&units=imperial')
-    except:
-        print('Error: unable to retrieve weather data')
-    else:
         weather_data = r.json()
 
         if 'current' in weather_data:
@@ -31,7 +29,11 @@ def update():
             print('Weather data saved')
         else:
             # Rate limit reached or other error
-            print('Weather was not provided. Check API rate limit.')
+            logging.error('Weather was not provided. Check API rate limit.')
+    except requests.exceptions.JSONDecodeError:
+        logging.error('Weather data not properly formed JSON.')
+    except requests.exceptions.RequestException as e:
+        logging.error('Connection error while trying to retrieve weather data.')
 
 # Get data from cache file
 def get():
