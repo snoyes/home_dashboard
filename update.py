@@ -1,9 +1,6 @@
 import sys, json
 from importlib import import_module
 
-#if 'service' not in sys.path:
-    #sys.path.append('services')
-
 def list_active_components():
     with open('services.json') as json_file:
         grid_data = json.load(json_file)
@@ -23,4 +20,3 @@ if __name__ == "__main__":
             print(f'{component} will update every {update_interval} seconds')
         else:
             print(f'{component} has no update callback')
-
