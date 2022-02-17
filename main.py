@@ -24,7 +24,8 @@ for component, update_frequency in update.list_active_components():
         logging.info(f'Found callback for {component}')
         event_type = pygame.event.custom_type()
         UPDATE_EVENTS[event_type] = callback
-        pygame.time.set_timer(event_type, 1000 * update_frequency)
+        if update_frequency:
+            pygame.time.set_timer(event_type, 1000 * update_frequency)
         if config('UPDATE_ON_STARTUP', default=False, cast=bool):
             logging.info(f'Updating {component} data')
             callback()
