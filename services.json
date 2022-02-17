@@ -6,7 +6,7 @@
         },
         {
             "service": "is_it_friday",
-            "update_interval_seconds": 10
+            "update_interval_seconds": 300
         }
     ]
 }
