@@ -1,7 +1,8 @@
 import sys
 from datetime import datetime
+if '../' not in sys.path:
+    sys.path.append('../')
 
-sys.path.append('../')
 import colors, fonts, services.weather as weather
 
 padding = 10

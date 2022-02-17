@@ -1,6 +1,8 @@
 import sys
 
-sys.path.append('../')
+if '../' not in sys.path:
+    sys.path.append('../')
+
 import pygame, colors, fonts
 
 camera_label_font = fonts.font_2xl

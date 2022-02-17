@@ -3,6 +3,10 @@
         {
             "service": "weather",
             "update_interval_seconds": 300
+        },
+        {
+            "service": "is_it_friday",
+            "update_interval_seconds": 10
         }
     ]
 }
