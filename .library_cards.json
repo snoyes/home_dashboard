@@ -1,0 +1,26 @@
+[
+    {
+        "card_name": "Your Name",
+        "url": "http://mcpl-websvr.co.midland.tx.us/TLCScripts/interpac.dll?PatronCurrentLoans&Config=sample&FormId=-1174&Branch=,0,",
+        "headers": {
+            "user-agent": "(compatible; MSIE 4.01; MSN 2.5; AOL 4.0; Windows 98)",
+            "referer": "http://mcpl-websvr.co.midland.tx.us/TLCScripts/Interpac.dll?PatronReview"
+        },
+        "cookies": {
+            "MyAccount1": "library card number",
+            "MyAccount2": "password"
+        }
+    },
+    {
+        "card_name": "Someone else's name",
+        "url": "http://mcpl-websvr.co.midland.tx.us/TLCScripts/interpac.dll?PatronCurrentLoans&Config=sample&FormId=-1174&Branch=,0,",
+        "headers": {
+            "user-agent": "(compatible; MSIE 4.01; MSN 2.5; AOL 4.0; Windows 98)",
+            "referer": "http://mcpl-websvr.co.midland.tx.us/TLCScripts/Interpac.dll?PatronReview"
+        },
+        "cookies": {
+            "MyAccount1": "library card number",
+            "MyAccount2": "password"
+        }
+    }
+]
