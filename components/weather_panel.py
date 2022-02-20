@@ -3,7 +3,9 @@ from datetime import datetime
 from decouple import config
 from os.path import exists
 
-sys.path.append('../')
+if '../' not in sys.path:
+    sys.path.append('../')
+
 import pygame, colors, fonts, services.weather as weather
 
 ICON_SCALE = config('ICON_SCALE', default=1, cast=int)
